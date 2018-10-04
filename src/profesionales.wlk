@@ -31,7 +31,7 @@ class ProfesionalVinculado {
 		universidad = univ
 	}
 	method provinciasDondePuedeTrabajar(){
-		return universidad.provincia()
+		return #{universidad.provincia()}
 	}
 	method honorariosPorHora(){
 		return universidad.honorarios()
@@ -44,7 +44,7 @@ class ProfesionalVinculado {
 // a esta clase le faltan atributos y métodos
 class ProfesionalLibre {
 	var universidad
-	var provincia
+	var provincia = #{}
 	var honorario
 	
 	method universidad() {
@@ -54,7 +54,7 @@ class ProfesionalLibre {
 		universidad = univ
 	}
 	method provinciasDondePuedeTrabajar() {
-		return universidad
+		return #{universidad.provincia()}
 	}
 	method provinciasDondePuedeTrabajar(prov) {
 		provincia = prov

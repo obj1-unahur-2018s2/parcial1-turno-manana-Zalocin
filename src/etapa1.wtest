@@ -35,22 +35,53 @@ describe "Etapa 1" {
 		melina.honorariosPorHora()
 		melina.provinciasDondePuedeTrabajar()
 		rocio.universidad(univHurlingham)
-		rocio.honorariosPorHora(5000)
-		rocio.provinciasDondePuedeTrabajar('Santa Fe,Cordoba,Buenos Aires')
+		rocio.setHonorariosPorHora(5000)
+		rocio.honorariosPorHora()
+		rocio.provinciasDondePuedeTrabajar(#{'Santa Fe', 'Cordoba', 'Buenos Aires'})
 		luciana.universidad(univRosario)
-		luciana.honorariosPorhora(3200)
-		luciana.provinciasDondePuedeTrabajar('Santa Fe, Entre Rios')
+		luciana.setHonorariosPorHora(3200)
+		luciana.honorariosPorHora()
+		luciana.provinciasDondePuedeTrabajar(#{'Santa Fe', 'Entre Rios'})
 		
-		empresa1.contratarProfesionales(juana,melina,rocio,luciana)
-		empresa1.honorarioDeReferencia(3500)
+		empresa1.contratarProfesionales(juana)
+		empresa1.contratarProfesionales(melina)
+		empresa1.contratarProfesionales(rocio)
+		empresa1.contratarProfesionales(luciana)
+		empresa1.setHonorarioDeReferencia(3500)
+		
 		
 		
 	}
 	
 
 	test "profesional caro" {
-
-		assert.equals(rocio, empresa1.profesionalesCaros())
+		assert.equals( [rocio], empresa1.profesionalesCaros() )
 
 	}
+	
+	test 'universidades formadoras' {
+		assert.equals( #{univRosario, univCorrientes, univHurlingham}, empresa1.universidadesFormadoras() )
+		
+	}
+	
+	test "profesional mas Barato" {
+		assert.equals( juana, empresa1.profesionalMasBarato() )
+
+	}
+	
+	test "provincias cubiertas"{ 
+		const listadoProvincias = #{'Santa Fe', 'Cordoba', 'Misiones'}	
+			
+		assert.equals( #{'Santa Fe', 'Cordoba'}, empresa1.provinciasCubiertas(listadoProvincias) )
+	}
+	//NO está tomando Cordoba.
+	
+	test "donde estudian"{
+		assert.equals(2,empresa1.dondeEstudiaron(univRosario))
+		assert.equals(1,empresa1.dondeEstudiaron(univHurlingham))
+		assert.equals(1,empresa1.dondeEstudiaron(univCorrientes))
+		assert.equals(0,empresa1.dondeEstudiaron(univSanMartin))
+
+	}
+
 }
