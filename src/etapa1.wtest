@@ -1,0 +1,56 @@
+import profesionales.*
+import universidades.*
+import empresa.*
+
+
+
+describe "Etapa 1" {
+	var univSanMartin = new Universidad()
+	var univRosario = new Universidad()
+	var univCorrientes = new Universidad()
+	var univHurlingham = new Universidad() 
+	
+	var juana = new ProfesionalVinculado()
+	var melina = new ProfesionalAsociado()
+	var rocio = new ProfesionalLibre()
+	var luciana = new ProfesionalLibre()
+	
+	var empresa1 = new Empresa()
+	
+	
+	fixture {
+		univSanMartin.setProvincia('Buenos Aires')
+		univSanMartin.setHonorario(3500)
+		univRosario.setProvincia('Santa Fe')
+		univRosario.setHonorario(2800)
+		univCorrientes.setProvincia('Corrientes')
+		univCorrientes.setHonorario(4200)
+		univHurlingham.setProvincia('Buenos Aires')
+		univHurlingham.setHonorario(8800)
+		
+		juana.universidad(univRosario)
+		juana.honorariosPorHora()
+		juana.provinciasDondePuedeTrabajar()
+		melina.universidad(univCorrientes)
+		melina.honorariosPorHora()
+		melina.provinciasDondePuedeTrabajar()
+		rocio.universidad(univHurlingham)
+		rocio.honorariosPorHora(5000)
+		rocio.provinciasDondePuedeTrabajar('Santa Fe,Cordoba,Buenos Aires')
+		luciana.universidad(univRosario)
+		luciana.honorariosPorhora(3200)
+		luciana.provinciasDondePuedeTrabajar('Santa Fe, Entre Rios')
+		
+		empresa1.contratarProfesionales(juana,melina,rocio,luciana)
+		empresa1.honorarioDeReferencia(3500)
+		
+		
+	}
+	
+
+	test "profesional caro" {
+
+		assert.equals(rocio, empresa1.profesionalesCaros())
+
+	}
+}
